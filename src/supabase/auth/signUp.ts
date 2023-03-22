@@ -11,9 +11,13 @@ const signUp = async (
   email: string,
   password: string
 ): Promise<responseData> => {
-  const data = (await supabase.auth.signUp({ email, password })).data
+  const res = await supabase.auth.signUp({ email, password })
 
-  return data
+  if (res.error != null) {
+    throw res.error
+  }
+
+  return res.data
 }
 
 export default signUp

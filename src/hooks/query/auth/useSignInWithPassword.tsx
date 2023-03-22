@@ -1,4 +1,4 @@
-import { AuthError } from '@supabase/supabase-js'
+import { type AuthError } from '@supabase/supabase-js'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
 
