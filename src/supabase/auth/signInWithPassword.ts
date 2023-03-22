@@ -10,11 +10,14 @@ export interface responseData {
 const signInWithPassword = async (
   email: string,
   password: string
-): Promise<responseData> => {
-  const data = (await supabase.auth.signInWithPassword({ email, password }))
-    .data
+): Promise<any> => {
+  const res = await supabase.auth.signInWithPassword({ email, password })
 
-  return data
+  if (res.error != null) {
+    throw res.error
+  }
+
+  return res.data
 }
 
 export default signInWithPassword

@@ -3,7 +3,7 @@ import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
 
 import queryClient from '~/queryClient'
-import { alertAtom, alertTaskAdded } from '~/state'
+import { alertAtom, alertServiceErr, alertTaskAdded } from '~/state'
 import createTask from '~/supabase/task/createTask'
 
 function useCreateTask(): UseMutationResult<
@@ -18,6 +18,9 @@ function useCreateTask(): UseMutationResult<
     onSuccess: () => {
       void queryClient.invalidateQueries(['tasks'])
       setAlert(alertTaskAdded())
+    },
+    onError: () => {
+      setAlert(alertServiceErr())
     }
   })
 

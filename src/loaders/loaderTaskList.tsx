@@ -7,7 +7,7 @@ const loaderTaskList =
     const query: any = taskListQuery()
 
     // ⬇️ return data or fetch it
-    return await (queryClient.getQueryData(query.queryKey ?? '') ??
+    return await (queryClient.getQueryData(query.queryKey ?? ['']) ??
       (await queryClient.fetchQuery(query)))
   }
 

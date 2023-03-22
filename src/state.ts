@@ -58,8 +58,10 @@ export const alertUndoneTask = (): any => ({
   forceRender: Date.now()
 })
 
-export const alertServiceErr = (): any => ({
-  label: 'Something wrong has happened, please try again or later',
+export const alertServiceErr = (
+  label = 'Something wrong has happened, please try again or later'
+): any => ({
+  label,
   className: 'alert-error text-error-content',
   icon: iconKeys.ERROR,
   forceRender: Date.now()

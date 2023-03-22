@@ -7,23 +7,18 @@ export interface tasksResponse {
 }
 
 const getTasks = async (): Promise<tasksResponse[]> => {
-  const data = (await supabase.from('todos').select('task,id,is_complete')).data
+  const res = await supabase.from('todos').select('task,id,is_complete')
 
-  if (data != null) {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    return data.map(({ is_complete, id, ...data }) => ({
-      ...data,
-      idTask: id,
-      isComplete: is_complete
-    }))
+  if (res.error != null) {
+    throw new Error(res.error.message)
   }
-  return [
-    {
-      isComplete: false,
-      idTask: -1,
-      task: ''
-    }
-  ]
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  return res.data.map(({ is_complete, id, ...data }) => ({
+    ...data,
+    idTask: id,
+    isComplete: is_complete
+  }))
 }
 
 export default getTasks

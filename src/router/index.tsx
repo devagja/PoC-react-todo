@@ -8,6 +8,11 @@ import queryClient from '~/queryClient'
 const LoadableRedirect = loadable(
   async () => await import('~/components/templates/Redirect')
 )
+
+const LoadableErrorPage = loadable(
+  async () => await import('~/pages/ErrorPage')
+)
+
 const LoadableLayout = loadable(
   async () => await import('~/components/templates/Layout')
 )
@@ -47,6 +52,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <LoadableHome />,
+            errorElement: <LoadableErrorPage />,
             loader: loaderTaskList(queryClient)
           }
         ]

@@ -45,7 +45,6 @@ const MotionPerspectiveWrapper = memo(function _({
   )
 
   const motionParams = useMemo(() => {
-    console.log(shouldReduceMotion)
     return shouldReduceMotion ?? false ? disableOptions : enableOptions
   }, [shouldReduceMotion, enableOptions, disableOptions])
 

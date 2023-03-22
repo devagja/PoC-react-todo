@@ -25,7 +25,7 @@ const CreateTaskForm = memo(function _(): ReactElement {
         reset()
       })
     },
-    [createTaskMutation.reset]
+    [createTaskMutation, reset]
   )
 
   return (
