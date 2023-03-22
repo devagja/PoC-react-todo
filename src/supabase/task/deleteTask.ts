@@ -1,13 +1,13 @@
-import type { PostgrestSingleResponse } from '@supabase/supabase-js'
-
 import supabase from '../client'
 
-const deleteTask = async (
-  id: number
-): Promise<PostgrestSingleResponse<null>> => {
-  const res = await supabase.from('todos').delete().eq('id', id)
+const deleteTask = async (id: number): Promise<never> => {
+  const res = await supabase.from('todos').delete().eq('id', id).single()
 
-  return res
+  if (res.error != null) {
+    throw new Error()
+  }
+
+  return res.data
 }
 
 export default deleteTask
