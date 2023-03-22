@@ -1,3 +1,4 @@
+import { type AuthError } from '@supabase/supabase-js'
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
 
@@ -21,13 +22,12 @@ function useSignInWithPassword(): UseMutationResult<
 
   const mutation = useMutation(
     ({ email, password }: requestParams) => signInWithPassword(email, password),
-
     {
       onSuccess: () => {
         setAlert(alertWelcome())
       },
-      onError: () => {
-        setAlert(alertServiceErr())
+      onError: (error: AuthError) => {
+        setAlert(alertServiceErr(error.message))
       }
     }
   )

@@ -1,9 +1,13 @@
 import supabase from '../client'
 
 const resetPasswordForEmail = async (email: string): Promise<{} | null> => {
-  const data = (await supabase.auth.resetPasswordForEmail(email)).data
+  const res = await supabase.auth.resetPasswordForEmail(email)
 
-  return data
+  if (res.error != null) {
+    throw res.error
+  }
+
+  return res.data
 }
 
 export default resetPasswordForEmail

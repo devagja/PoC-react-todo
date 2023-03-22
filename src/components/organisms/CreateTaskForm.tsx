@@ -1,8 +1,11 @@
 import { memo, useCallback, type ReactElement } from 'react'
+import { type SubmitHandler } from 'react-hook-form'
 
 import Input from '~/components/atoms/Input'
 import useCreateTask from '~/hooks/query/task/useCreateTask'
-import useCreateTaskForm from '~/hooks/rhf/useCreateTaskForm'
+import useCreateTaskForm, {
+  type CreateTaskFormFields
+} from '~/hooks/rhf/useCreateTaskForm'
 
 const CreateTaskForm = memo(function _(): ReactElement {
   const {
@@ -14,14 +17,15 @@ const CreateTaskForm = memo(function _(): ReactElement {
 
   const createTaskMutation = useCreateTask()
 
-  const onSubmit = useCallback(
-    (data: { task: string }): void => {
-      const { task } = data
+  const onSubmit: SubmitHandler<CreateTaskFormFields> = useCallback(
+    ({ task }, event): void => {
+      event?.preventDefault()
+
       void createTaskMutation.mutateAsync(task).then(() => {
         reset()
       })
     },
-    [createTaskMutation.reset]
+    [createTaskMutation, reset]
   )
 
   return (

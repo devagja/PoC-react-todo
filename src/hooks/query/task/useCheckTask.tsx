@@ -3,7 +3,7 @@ import { useMutation, type UseMutationResult } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
 
 import queryClient from '~/queryClient'
-import { alertAtom, alertDoneTask, alertUndoneTask } from '~/state'
+import { alertAtom, alertDoneTask, alertServiceErr, alertUndoneTask } from '~/state'
 import setTaskStatus from '~/supabase/task/setTaskStatus'
 
 interface mutate {
@@ -21,11 +21,13 @@ function useCheckTask(): UseMutationResult<
 
   const mutation = useMutation(
     ({ idTask, status }: mutate) => setTaskStatus(idTask, status),
-
     {
       onSuccess: (a, { status }) => {
         void queryClient.invalidateQueries(['tasks'])
         setAlert(status ? alertDoneTask() : alertUndoneTask())
+      },
+      onError: () => {
+        setAlert(alertServiceErr())
       }
     }
   )
