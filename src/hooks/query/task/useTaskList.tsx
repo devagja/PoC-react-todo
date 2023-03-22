@@ -17,7 +17,7 @@ function useTaskList(): UseQueryResult<tasksResponse[], Error> {
   const setAlert = useSetAtom(alertAtom)
 
   const query = useQuery<tasksResponse[], Error>({
-    ...taskListQuery,
+    ...taskListQuery(),
     onError: (error: Error) => {
       setAlert(alertServiceErr(error.message))
     }
