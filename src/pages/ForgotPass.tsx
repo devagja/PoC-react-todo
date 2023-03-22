@@ -47,7 +47,8 @@ function ForgotPass(): ReactElement {
   const resetPasswordForEmailMutation = useResetPasswordForEmail()
 
   const onSubmit: SubmitHandler<ForgotPassFormFields> = useCallback(
-    ({ email, magicLink }: SubmitParams): void => {
+    ({ email, magicLink }, event): void => {
+      event?.preventDefault()
       if (magicLink) {
         void signInOtpMutation.mutateAsync(email)
       } else {
