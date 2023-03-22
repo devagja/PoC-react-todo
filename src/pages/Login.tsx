@@ -11,12 +11,6 @@ import useSignInWithPassword from '~/hooks/query/auth/useSignInWithPassword'
 import useLoginForm, { type LoginFormFields } from '~/hooks/rhf/useLoginForm'
 import { alertAtom } from '~/state'
 
-interface onSubmitParams {
-  email: string
-  password: string
-  magicLink: boolean
-}
-
 function Login(): ReactElement {
   const { setHero } = useOutletContext<{
     setHero: ({ title, body }: HeroAttr) => void
@@ -52,7 +46,8 @@ function Login(): ReactElement {
   const watchMagicLink = watch('magicLink')
 
   const onSubmit: SubmitHandler<LoginFormFields> = useCallback(
-    ({ email, password, magicLink }: onSubmitParams): void => {
+    ({ email, password, magicLink }, event): void => {
+      event?.preventDefault()
       if (magicLink) {
         void signInOtpMutation.mutateAsync(email)
       } else {

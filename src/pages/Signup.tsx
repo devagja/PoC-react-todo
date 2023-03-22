@@ -36,7 +36,8 @@ function Signup(): ReactElement {
   const signUpMutation = useSignUp()
 
   const onSubmit: SubmitHandler<SignupFormFields> = useCallback(
-    ({ email, password }): void => {
+    ({ email, password }, event): void => {
+      event?.preventDefault()
       void signUpMutation.mutateAsync({ email, password }).then(() => {
         nav('/login')
       })
