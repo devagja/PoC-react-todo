@@ -1,0 +1,13 @@
+vite.config.ts
+vite-env.d.ts
+
+.prettierrc.js
+.eslintrc.js
+env.d.ts
+
+.swc/
+.husky/
+
+node_modules/
+dist/
+coverage/
