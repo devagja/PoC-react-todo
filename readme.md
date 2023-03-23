@@ -13,7 +13,7 @@ Build a new Website with React and typescript displaying the data of the api wit
 Share your code via a git repository. ✅
 Document in the README, all steps required to install the code/database and run and browse the application on a local system. ✅
 
-Create a docker-compose file to run directly on our local machines
+Create a docker-compose file to run directly on our local machines ✅
 
 ## Como usar el proyecto
 
